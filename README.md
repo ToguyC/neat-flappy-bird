@@ -14,10 +14,10 @@ Neat-flappy-bird is a neural network based AI for the flappy bird game
   
 ### Setup
 
-> you need to install this package
+> you need to install those packages
 
 ```
-$ pip intall neat-python
+$ pip intall neat-python pygame
 ```
 
 To run it, simply execute the ```flappy-bird.py``` file and ENJOY !
