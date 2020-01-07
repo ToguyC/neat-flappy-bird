@@ -3,7 +3,7 @@
 
 Neat-flappy-bird is a neural network based AI for the flappy bird game
 
-![GIF-demo]([img/demo.gif](https://github.com/TanguyCavagna/neat-flappy-bird/blob/master/img/demo.gif))
+![GIF-demo](https://github.com/TanguyCavagna/neat-flappy-bird/blob/master/img/demo.gif)
 
 <hr>
 
