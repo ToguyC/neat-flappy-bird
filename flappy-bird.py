@@ -23,6 +23,8 @@ BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join('img', 'bg.png'
 STAT_FOND = pygame.font.SysFont('comicsans', 50)
 
 GEN = 0
+FRAME_RATE = 50
+MAX_THRESHOLD = 1000
 
 def draw_window(win, birds, pipes, base, score, gen):
     win.blit(BG_IMG, (0, 0))
@@ -32,6 +34,20 @@ def draw_window(win, birds, pipes, base, score, gen):
     base.show(win)
     for bird in birds:
         bird.show(win)
+
+    # Draw the lines of each birds
+    for bird in birds:
+        if not pipes[0].passed:
+            pipe = pipes[0]
+        else:
+            pipe = pipes[1]
+
+        bird_pos = (bird.x + (bird.img.get_width() / 2), bird.y + (bird.img.get_height() / 2))
+        line_width = 3
+        red = (255, 0, 0)
+        pygame.draw.line(win, red, bird_pos, (pipe.x, pipe.height), line_width)
+        pygame.draw.line(win, red, bird_pos, (pipe.x, pipe.bottom), line_width)
+        
 
     text = STAT_FOND.render(f'Score: {str(score)}', 1, (255, 255, 255))
     win.blit(text, (WIDTH - 10 - text.get_width(), 10))
@@ -113,7 +129,7 @@ def main(genomes, config):
             pipes.remove(r)
 
         for i, bird in enumerate(birds):
-            if genome[i].fitness >= 20:
+            if genome[i].fitness >= MAX_THRESHOLD:
                 run = False
                 break
 
@@ -125,7 +141,7 @@ def main(genomes, config):
         base.move()
         draw_window(win, birds, pipes, base, score, GEN)
 
-        clock.tick(30)
+        clock.tick(FRAME_RATE)
 
 def run(config_path, model=None):
     import pickle
